@@ -1,5 +1,7 @@
 #include <iostream>
+#include <iomanip>
 #include <Windows.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -11,27 +13,26 @@ int main() {
     cout << "Найти максимальный элемент списка\n";
     cout << "=================================\n\n\n";
 
-    double list[6], max_el = 1e-9;
+    const int SIZE = 10;
+    double list[SIZE], max_el = 1e-9;
 
-    for (int i = 0; i <= 5 ; i++) {
-        double num_list;
 
-        cout << "Введите " << i + 1 << "-й элемент списка: ";
-        
-        while (!(cin >> num_list)) {
-            cout << "Ошибка ввода! Введите корректное число: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-        }
-
-        list[i] = num_list;
-
+    // Заполнение списка случайными числами
+    srand(static_cast<unsigned>(time(nullptr)));
+    for (int i = 0; i < SIZE; i++) {
+        list[i] = rand() % 51;
     }
 
-    for (int i = 0; i <= 5; i++) {
+    // Вывод списка
+    for (int i = 0; i < SIZE; i++) {
+        cout << setw(3) << list[i];
+    }
+
+    // Нахождение максимального элемента
+    for (int i = 0; i < SIZE; i++) {
         if (max_el < list[i]) max_el = list[i];
     }
-    
+
     cout << "\nМаксимальный элемент списка: " << max_el;
 
     return 0;
